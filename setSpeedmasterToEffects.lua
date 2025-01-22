@@ -7,12 +7,12 @@
 -- **Date			: 22.01.2025
 -- **************************************************
 
-local function print(msg)
+local function printAll(msg)
     Printf(msg)
     Echo(msg)
 end
 --- Open Preset, Set SpeedMaster, Update
-local function assign()
+local function setSpeedmasterToPresets()
     for i = tonumber(PresetFrom), tonumber(PresetTo), 1 do
         Cmd("Edit Preset " ..
             tonumber(SpeedMaster) .. "." .. i ..
@@ -20,21 +20,10 @@ local function assign()
     end
 end
 
-local function gatherUserInput()
-    SpeedMaster = TextInput("PresetPool")
-    PresetFrom = TextInput("PresetFrom")
-    PresetTo = TextInput("PresetTo")
-    SpeedMaster = TextInput("SpeedMaster")
-end
-
 local function messageBoxUserInput()
-    -- A table with two default buttons for the pop-up
     local defaultCommandButtons = {
-        { value = 2, name = "OK" },
-        { value = 1, name = "Cancel" }
+        { value = 2, name = "OK" }
     }
-    -- A table with three input fields
-    -- The fields will be displayed alphabetically in the pop-up based on name
     local inputFields = {
         { name = "1-PresetPool",  value = "", whiteFilter = "0123456789", vkPlugin = "NumericInput" },
         { name = "2-PresetFrom",  value = "", whiteFilter = "0123456789", vkPlugin = "NumericInput" },
@@ -59,6 +48,7 @@ local function messageBoxUserInput()
     -- Print the content of the returned table
     Printf("Success = " .. tostring(returnTable.success))
 
+    -- set the Variables based on user Input
     SpeedMaster = returnTable.inputs["1-PresetPool"]
     PresetFrom = returnTable.inputs["2-PresetFrom"]
     PresetTo = returnTable.inputs["3-PresetTo"]
@@ -67,14 +57,14 @@ end
 
 function main()
     messageBoxUserInput()
-    assign()
+    setSpeedmasterToPresets()
 
-    print("SpeedMaster " ..
+    printAll("SpeedMaster " ..
         tonumber(SpeedMaster) ..
         "; has been assigned to presets " ..
         tonumber(SpeedMaster) .. "." .. tonumber(PresetFrom) ..
         "; thru " .. tonumber(SpeedMaster) .. "." .. tonumber(PresetTo) .. ";")
-    print('Speed Master Assignment successful')
+    printAll('Speed Master Assignment successful')
 end
 
 return main
