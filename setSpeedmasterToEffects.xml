@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GMA3 DataVersion="0.8.84.0">
+    <UserPlugin Name="Set Speedmaster to effects" Version="0.0.0.0" Path="/setSpeedmasterToEffects">
+        <ComponentLua Name="Set Speedmaster to effects" FileName="setSpeedmasterToEffects.lua" />
+    </UserPlugin>
+</GMA3>
